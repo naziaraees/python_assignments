@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Library Manager</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Library Manager</h1>
+        <h2>Add a New Book</h2>
+        <form method="POST" action="/add" class="book-form">
+            <label for="book_name">Book Name:</label>
+            <input type="text" id="book_name" name="book_name" required>
+            
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+            
+            <label for="publish_year">Publish Year:</label>
+            <input type="number" id="publish_year" name="publish_year" required>
+            
+            <label for="total_pages">Total Pages:</label>
+            <input type="number" id="total_pages" name="total_pages" required>
+            
+            <label for="read_pages">Pages Read:</label>
+            <input type="number" id="read_pages" name="read_pages" required>
+            
+            <button type="submit">Add Book</button>
+        </form>
+
+        <h2>Your Library</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Author</th>
+                    <th>Publish Year</th>
+                    <th>Pages Read</th>
+                    <th>Total Pages</th>
+                    <th>% Read</th>
+                    <th>Update Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in library_data %}
+                <tr>
+                    <td>{{ book.book_name }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.publish_year }}</td>
+                    <td>{{ book.read_pages }}</td>
+                    <td>{{ book.total_pages }}</td>
+                    <td>{{ book.percentage_read|round(2) }}%</td>
+                    <td>
+                        <form method="POST" action="/update">
+                            <input type="hidden" name="index" value="{{ loop.index0 }}">
+                            <input type="number" name="read_pages" placeholder="Pages Read">
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

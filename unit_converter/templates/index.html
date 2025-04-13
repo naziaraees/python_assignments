@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Unit Converter</h1>
+        <form method="POST" class="conversion-form">
+            <label for="conversion_type">Select Conversion Type:</label>
+            <select id="conversion_type" name="conversion_type" required>
+                <option value="km_to_miles" {% if conversion_type == "km_to_miles" %}selected{% endif %}>Kilometers to Miles</option>
+                <option value="celsius_to_fahrenheit" {% if conversion_type == "celsius_to_fahrenheit" %}selected{% endif %}>Celsius to Fahrenheit</option>
+                <option value="kg_to_pounds" {% if conversion_type == "kg_to_pounds" %}selected{% endif %}>Kilograms to Pounds</option>
+            </select>
+
+            <label for="value">Enter Value:</label>
+            <input type="number" id="value" name="value" step="any" value="{{ value }}" required>
+
+            <button type="submit">Convert</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box">
+            <h2>Result:</h2>
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

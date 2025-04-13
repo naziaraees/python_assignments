@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Meter</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Password Strength Meter</h1>
+        <form method="POST" class="password-form">
+            <label for="password">Enter your password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Check Strength</button>
+        </form>
+
+        {% if strength %}
+        <div class="result-box">
+            <h2>Result:</h2>
+            <p>Your password strength is: <strong>{{ strength }}</strong></p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
